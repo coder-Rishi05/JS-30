@@ -2,6 +2,11 @@
 
 This project is part of the **JavaScript30 challenge**—30 projects in 30 days using vanilla JavaScript.
 
+
+```
+Live link : https://kitdrum3.netlify.app/
+```
+
 ## 🎯 Overview
 This is a **virtual drum kit** that lets you play drum sounds by pressing keys on your keyboard. It’s a great demonstration of:
 - **Event handling**
