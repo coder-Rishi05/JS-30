@@ -26,3 +26,43 @@ Copy
 Edit
 ```
 
+
+---
+
+## 🛠️ How It Works
+
+### HTML
+
+The markup contains:
+- A `.clock` container holding:
+  - `.clock-face`
+    - `.hand.hour-hand`
+    - `.hand.min-hand`
+    - `.hand.second-hand`
+
+These `.hand` divs are rotated using CSS transforms to indicate the current time.
+
+---
+
+### CSS
+
+- **Clock Styling**
+  - Circular border with shadows for a 3D look
+  - Positioned center-aligned hands
+  - Smooth transitions between rotations
+
+- **Background**
+  - A blurred background image fetched from Unsplash for aesthetic appeal
+
+---
+
+### JavaScript
+
+- **Selecting Elements**
+  ```javascript
+  const secondHand = document.querySelector(".second-hand");
+  const minsHand = document.querySelector(".min-hand");
+  const hourHand = document.querySelector(".hour-hand");
+
+  ```
+
