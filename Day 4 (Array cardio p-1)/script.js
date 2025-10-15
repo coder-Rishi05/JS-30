@@ -132,3 +132,38 @@ console.table(people_fname_lname);
 const sortData = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
 
 console.table("sorted data : ", sortData);
+
+// q4. reduce
+// using for loop
+var totalYears = 0;
+
+for (var i = 0; i < inventors.length; i++) {
+  totalYears += inventors[i].year;
+}
+
+console.log(totalYears);
+// using for reduce
+
+const dataYear = inventors.reduce((total, inventor) => {
+  return total + (inventor.passed - inventor.year);
+}, 0);
+
+console.log("datayear", dataYear);
+
+// q5.
+
+const oldest = inventors.sort((a, b) => {
+  const lastGuy = a.passed - a.year;
+  const next = b.passed - b.year;
+  return lastGuy > next ? -1 : 1;
+});
+
+console.table(oldest);
+
+
+// q6. 
+
+const category = document.querySelector('.mw-category')
+
+const links = category.querySelectorAll('a')
+
