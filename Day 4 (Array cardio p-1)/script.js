@@ -103,67 +103,105 @@ const data = [
 
 // 1. ans
 
-const dob = inventors.filter((item) => {
-  if (item.year >= 1500 && item.year < 1600) {
-    return true; // keep  it
-    // return item.first
+function q1_6() {
+  const dob = inventors.filter((item) => {
+    if (item.year >= 1500 && item.year < 1600) {
+      return true; // keep  it
+      // return item.first
+    }
+    // console.log(item.first)
+  });
+
+  console.table(dob);
+  // /console.log(typeof(dob))
+
+  const fifteen = inventors.filter(
+    (item) => item.year >= 1500 && item.year < 1600
+  );
+  console.table(fifteen);
+
+  // 2. ans.
+
+  const people_fname_lname = inventors.map(
+    (item) => `${item.first} ${item.last}`
+  );
+
+  console.table(people_fname_lname);
+
+  // Q3. ans
+
+  const sortData = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
+
+  console.table("sorted data : ", sortData);
+
+  // q4. reduce
+  // using for loop
+  var totalYears = 0;
+
+  for (var i = 0; i < inventors.length; i++) {
+    totalYears += inventors[i].year;
   }
-  // console.log(item.first)
-});
 
-console.table(dob);
-// /console.log(typeof(dob))
+  console.log(totalYears);
+  // using for reduce
 
-const fifteen = inventors.filter(
-  (item) => item.year >= 1500 && item.year < 1600
-);
-console.table(fifteen);
+  const dataYear = inventors.reduce((total, inventor) => {
+    return total + (inventor.passed - inventor.year);
+  }, 0);
 
-// 2. ans.
+  console.log("datayear", dataYear);
 
-const people_fname_lname = inventors.map(
-  (item) => `${item.first} ${item.last}`
-);
+  // q5.
 
-console.table(people_fname_lname);
+  const oldest = inventors.sort((a, b) => {
+    const lastGuy = a.passed - a.year;
+    const next = b.passed - b.year;
+    return lastGuy > next ? -1 : 1;
+  });
 
-// Q3. ans
+  console.table(oldest);
 
-const sortData = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
+  // q6.
 
-console.table("sorted data : ", sortData);
+  const category = document.querySelector(".mw-category");
 
-// q4. reduce
-// using for loop
-var totalYears = 0;
+  const links = Array.from(category.querySelectorAll("a"));
 
-for (var i = 0; i < inventors.length; i++) {
-  totalYears += inventors[i].year;
+  const de = links
+    .map((link) => link.textContent)
+    .filter((item) => item.includes("de"));
+  // here linkes is nodelist not an array so we can use map here to do so.
+  // we will use [...] or Array.from()
+
+  /**
+   * ex:
+   * const link = Array.from(category.querySelectorAll('a'));
+   * or
+   * const link = [category.querySelectorAll('a')];
+   */
 }
 
-console.log(totalYears);
-// using for reduce
+// Q7. sort people by last name alphabetically.
 
-const dataYear = inventors.reduce((total, inventor) => {
-  return total + (inventor.passed - inventor.year);
-}, 0);
+// console.log(people);
 
-console.log("datayear", dataYear);
+// function sortSecond(data) {
+//   let sort = [];
+//   let secondName = [];
+//   for (let i = 0; i < data.length; i++) {
+//     // console.log(data[i]);
+//     sort[i] = data[i].split(",");
+//     // secondName[i] = data[i + 1].split(",");
+//   }
+//   // return secondName;
+// }
 
-// q5.
+// const result = sortSecond(people);
 
-const oldest = inventors.sort((a, b) => {
-  const lastGuy = a.passed - a.year;
-  const next = b.passed - b.year;
-  return lastGuy > next ? -1 : 1;
+const alpha = people.sort((last, next) => {
+  const [alst, afirst] = last.split(", ");
+  const [blst, bfirst] = next.split(", ");
+  return alst > blst ? 1 : -1;
 });
 
-console.table(oldest);
-
-
-// q6. 
-
-const category = document.querySelector('.mw-category')
-
-const links = category.querySelectorAll('a')
-
+console.log(alpha);
