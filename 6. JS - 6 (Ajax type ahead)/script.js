@@ -1,0 +1,52 @@
+const searchInput = document.querySelector(".search");
+const suggestions = document.querySelector(".suggestions");
+
+const endpoint =
+  "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+const cities = [];
+
+fetch(endpoint)
+  .then((data) => data.json())
+  .then((data) => cities.push(...data))
+  .catch((err) => console.log(err));
+
+function findMatches(word, cities) {
+  return cities.filter((place) => {
+    // city matched
+    const reg = new RegExp(word, "gi"); // gi => global case sensitive
+
+    return place.city.match(reg) || place.state.match(reg);
+  });
+}
+
+function numComma() {
+  return x.toString().replace(/\B(?=(\d{3}) +(?!\d))/g, ",");
+}
+function displayMatches() {
+  const matchArray = findMatches(this.value, cities);
+
+  const html = matchArray
+    .map((place) => {
+      const reg = new RegExp(this.value, "gi");
+      const cityName = place.city.replace(
+        reg,
+        `<span class="hl" > ${this.value} </span>`
+      );
+      const stateName = place.state.replace(
+        reg,
+        `<span class="hl" > ${this.value} </span>`
+      );
+      return `
+                <li>        
+                    <span class="name"> ${cityName}, ${stateName} </span>
+                    <span class="population"> ${place.population} </span>
+                </li>        
+                `;
+    })
+    .join(" ");
+  suggestions.innerHTML = html;
+}
+
+searchInput.addEventListener("change", displayMatches);
+searchInput.addEventListener("keyup", displayMatches);
